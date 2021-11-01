@@ -1,0 +1,134 @@
+html{
+font-size: 62.5;
+}
+body{
+font-family: Georgia, 'Times New Roman', Times, serif;}
+
+
+.container{
+    display: block;
+    justify-content: center;
+    
+}
+
+.container-jogo{
+width: 480px;
+margin-left: auto;
+margin-right: auto;
+margin-top: 6rem;
+}
+.title{
+    font-size: 3.5rem;
+    margin-top: 0px;
+    padding-left: 0.4rem;
+    padding-top: 3rem;
+}
+.circulo-jogo{
+   width: 480px;
+   height: 480px;
+  display: flex;
+  flex-wrap: wrap;
+  position: relative; 
+}
+
+.pad{
+width: calc(100% - 50%);
+height: calc(100% - 50%);
+}
+/*cor do topo esquerdo*/
+.pad-top-left{
+    background-color: green;
+    border-top-left-radius: 100%;
+}
+.pad-top-left-ativo{
+    background-color: lightgreen;
+}
+/*cor do topo direito*/
+.pad-top-right{
+    background-color: red;
+    border-top-right-radius: 100%;
+}
+.pad-top-right-ativo{
+    background-color: #FF6961;
+}
+/*cor de baixo lado esquerdo*/
+.pad-botton-left{
+    background-color: yellow;
+    border-bottom-left-radius: 100%;
+}
+.pad-botton-left-ativo{
+    background-color: lightyellow;
+}
+/*cor de baixo lado direito*/
+.pad-botton-right{
+    background-color: blue;
+    border-bottom-right-radius: 100%;
+}
+.pad-botton-right-ativo{
+    background-color: lightblue;
+}
+
+/*reconhecer botões do circulo*/
+.pad-btn{
+    cursor: pointer;
+} 
+.controles{
+position:absolute;
+background-color:white;
+width: calc(100% /2);
+height: calc(100% /2);
+top: calc(100% / 4);
+left: calc(100% / 4);
+border-radius: 50%;
+border: 0.8rem solid black;
+}
+.inter-graf{
+padding-left: 0.2rem;
+display: flex;
+margin-right: 1rem;
+margin-top: 0px;
+}
+.group{
+    margin-right: 1rem;
+    margin-top: 0px;
+    ;
+}
+.count{
+    display: flex;
+    width: 3rem;
+    margin-left: 8px;
+    border: 0.2rem solid black;
+    text-align: center;
+    background-color: brown;
+}
+.n-cont{
+     margin-left: 1rem; 
+    font-size: 1rem;
+    font-weight: bold;
+}
+.btn-start{
+    background-color: green;
+    width: 3.3rem;
+    height: 2.5rem;
+    border: 0.3rem solid black;
+    border-radius: 5rem;
+    box-shadow: 0 .2rem  .3rem #444;
+}
+.btn-start-ativo{
+    transform: translate(0 .2rem);
+    box-shadow: none;
+}
+.btn-stop{
+  background-color: yellow; 
+    width: 3.3rem;
+    height: 2.5rem;
+    border: 0.2rem solid black;
+    border-radius: 5rem;
+}
+
+
+/*rodapé*/
+.rodape{
+    text-align: center;
+    margin-top: 6rem;
+}
