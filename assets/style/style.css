@@ -45,7 +45,7 @@ border: 0.5rem solid black;
     background-color: green;
     border-top-left-radius: 100%;
 }
-.pad-top-left-ativo{
+.pad-top-left.pad--active{
     background-color: lightgreen;
 }
 /*cor do topo direito*/
@@ -53,15 +53,15 @@ border: 0.5rem solid black;
     background-color: red;
     border-top-right-radius: 100%;
 }
-.pad-top-right-ativo{
-    background-color: #FF6961;
+.pad-top-right.pad--active{
+    background-color:  #ff4c4c;
 }
 /*cor de baixo lado esquerdo*/
 .pad-botton-left{
     background-color: yellow;
     border-bottom-left-radius: 100%;
 }
-.pad-botton-left-ativo{
+.pad-botton-left.pad--active{
     background-color: lightyellow;
 }
 /*cor de baixo lado direito*/
@@ -69,7 +69,7 @@ border: 0.5rem solid black;
     background-color: blue;
     border-bottom-right-radius: 100%;
 }
-.pad-botton-right-ativo{
+.pad-botton-right.pad--active{
     background-color: lightblue;
 }
 
@@ -129,7 +129,7 @@ margin-top: 0px;
     border: .2rem solid black;
     cursor: pointer;
 }
-.btn-start-ativo{
+.btn:active{
     transform: translate(0 .2rem);
     box-shadow: none;
     cursor: pointer;

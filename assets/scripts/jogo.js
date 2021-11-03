@@ -7,7 +7,7 @@ const jogar = {
     score: 0,
     sequencia: [],
     playSequencia: [],
-    naoJoga: false
+    jogadorPodeJogar: false
 };
 
 
@@ -20,7 +20,7 @@ const jogo = {
      terceiroNivel:  document.getElementById("nivel3"),
 
     btnStart:  document.querySelector(".btn-start"),
-    btnStop: document.getElementById("btn-stop"),
+    btnStop: document.querySelector(".btn-stop"),
     contar:  document.querySelector(".count"),
     pads: document.querySelectorAll(".pad")
 }
@@ -43,13 +43,13 @@ sonsUrl.forEach(sndPaht  => {
 jogo.btnStart.addEventListener("click", () =>{
 
     startJogo();
-            
-    jogar.comecaJogo = jogo.btnStart.classList.toggle(".count-ativo");
+    jogo.btnStart.classList.toggle(".btn:active"); 
+    jogar.comecaJogo = jogo.btnStart.classList.toggle("btn:active");
    jogo.contar.innerHTML = "--";
-   
+
         jogar.comecaJogo = true;
         jogar.score = 0;
-         jogar.naoJoga = false;
+         jogar.jogadorPodeJogar = false;
 
         jogar.sequencia = [];
        jogar. sequenciaJogador = [];
@@ -64,9 +64,35 @@ const startJogo = () => {
     })
 }
 
-const  padListener = (e) =>{
+    const  padListener = (e) =>{
+    if(!jogar.jogadorPodeJogar)
+    return;
 
-}
+    let sonsId;
+        jogo.pads.forEach((pad, key) => {
+            if(pad === e.target)
+            sonsId = key;
+        } );
+       e.target.classList.add("pad--active");
+
+        jogar.sons[sonsId].play();
+        jogar.playSequencia.push(sonsId);
+
+        e.target.classList.remove("pad--active");
+
+        //jogada atual do jogador.
+        const movimentoAtual = jogar.playSequencia.length - 1;
+        
+        if(jogar.playSequencia[movimentoAtual] !== jogar.sequencia[movimentoAtual]){
+            jogar.jogadorPodeJogar = false;
+            desabilitaPads();
+            playSequencia();
+    }else if(movimentoAtual === jogar.sequencia.length - 1){
+        novaCor();
+        playSequencia();
+    }
+        
+    }
 
 
 jogo.pads.forEach(pad =>{
@@ -94,27 +120,36 @@ const  playSequencia  = () => {
     padOn = true;
 
     jogar.playSequencia = [];
-    jogar.naoJoga = false;
+    jogar.jogadorPodeJogar = false;
     
     const intervalo = setInterval(() => {
-       if(padOn){
+     if(!jogar.comecaJogo){
+         clearInterval(intervalo);
+         desabilitaPads();
+         return;
+         
+     } 
+      
+        if(padOn){
 
            if (counter  === jogar.sequencia.length){
              clearInterval(intervalo);
             desabilitaPads();
+               esperaClick();
 
-            jogar.naoJoga = true;
+            jogar.jogadorPodeJogar = true;
             return;
         }
            const pegaId = jogar.sequencia[counter];
            const pad = jogo.pads[pegaId];
 
-             //jogar.sons[pegaId].play();
-           pad.classList.add("pad-ativo");
+        jogar.sons[pegaId].play();
+          pad.classList.add("pad--active");
            counter++;
-       }else{
+        }else{
            desabilitaPads();
-       }
+
+        }
        padOn = !padOn; 
     }, 750);
 }
@@ -127,7 +162,7 @@ const piscar =  (text , calback) => {
     
     on = true;
     jogo.contar.innerHTML = text;
-
+   
   const intervalo =  setInterval(() => {
      if(!jogar.comecaJogo){
          clearInterval(intervalo);
@@ -149,25 +184,35 @@ const piscar =  (text , calback) => {
   
     },250);
 }
-
+// espera clique do jogador.
 const esperaClick = () => {
+    clearTimeout(jogar.timeout);
+   
     jogar.timeout = setTimeout(() =>{
-        if(!jogar.naoJoga){
-            return;
+        if(!jogar.jogadorPodeJogar)
+            return; 
             desabilitaPads();
             playSequencia();
-        }
-    },5000);
+        
+    }, 5000);
 }
+
+const resetPlayAgain = () => {
+
+}
+
 jogo.btnStop.addEventListener("click", () => { 
+    
 
     let couter = 0;
     on = true;
+    
 
     const intervalo = setInterval(() => {
 
         if (on) {
             jogo.contar.classList.remove("count-ativo");
+
         } else {
 
             jogo.contar.classList.add("count");
@@ -175,7 +220,7 @@ jogo.btnStop.addEventListener("click", () => {
             if (++couter === 3) {
                 clearInterval(intervalo);
                 jogo.contar.innerHTML = "--";
-
+ 
             }
         }
         on = !on;
@@ -187,7 +232,7 @@ jogo.btnStop.addEventListener("click", () => {
 
 const desabilitaPads = () => {
     jogo.pads.forEach(pad => {
-        pad.classList.remove("pad-boton-right-ativo");
+        pad.classList.remove("pad--active");
     })
 }
 
