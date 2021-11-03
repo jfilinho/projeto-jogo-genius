@@ -7,7 +7,8 @@ const jogar = {
     score: 0,
     sequencia: [],
     playSequencia: [],
-    jogadorPodeJogar: false
+    jogadorPodeJogar: false,
+    reset: false
 };
 
 
@@ -55,6 +56,7 @@ jogo.btnStart.addEventListener("click", () =>{
        jogar. sequenciaJogador = [];
 
         desabilitaPads();
+    mudaCursor("auto");
 });
 
 const startJogo = () => {
@@ -78,22 +80,27 @@ const startJogo = () => {
         jogar.sons[sonsId].play();
         jogar.playSequencia.push(sonsId);
 
+        setTimeout(() =>{
+            
         e.target.classList.remove("pad--active");
 
         //jogada atual do jogador.
         const movimentoAtual = jogar.playSequencia.length - 1;
         
         if(jogar.playSequencia[movimentoAtual] !== jogar.sequencia[movimentoAtual]){
+          //jogador errou a sequencia. 
             jogar.jogadorPodeJogar = false;
             desabilitaPads();
-            playSequencia();
+           // playSequencia();
+           resetPlayAgain();
     }else if(movimentoAtual === jogar.sequencia.length - 1){
         novaCor();
         playSequencia();
     }
-        
+        esperaClick();
+     }, 250 );
     }
-
+        
 
 jogo.pads.forEach(pad =>{
     pad.addEventListener("click", padListener);
@@ -108,6 +115,13 @@ const setScore = () => {
 
 //escolhe uma cor aleatória para o jogo
 const novaCor = () => {
+    if(jogar.score === 3){
+        piscar("ok");
+        pad.classList.remove("pad--active");
+    
+        return;
+}
+
  jogar.sequencia.push(Math.floor(Math.random( ) * 4));
 jogar.score++;
 
@@ -121,6 +135,8 @@ const  playSequencia  = () => {
 
     jogar.playSequencia = [];
     jogar.jogadorPodeJogar = false;
+
+    mudaCursor("auto");
     
     const intervalo = setInterval(() => {
      if(!jogar.comecaJogo){
@@ -136,7 +152,7 @@ const  playSequencia  = () => {
              clearInterval(intervalo);
             desabilitaPads();
                esperaClick();
-
+               mudaCursor("pointer");
             jogar.jogadorPodeJogar = true;
             return;
         }
@@ -192,17 +208,37 @@ const esperaClick = () => {
         if(!jogar.jogadorPodeJogar)
             return; 
             desabilitaPads();
-            playSequencia();
-        
+            //playSequencia();
+            resetPlayAgain();
+            
     }, 5000);
 }
 
 const resetPlayAgain = () => {
+    jogar.jogadorPodeJogar = false;
+       if(jogar.reset === false){
+           piscar("!!", () => {
+               jogar.score = 0;
+               jogargar.sequencia = [];
+                //comecaJogo();
+           })
+       }
+      else{
+           piscar("**", () => {
+               jogar.score();
+               
+           });
+      } 
+          
+
+         //playSequencia();
 
 }
 
+//desliga o jogo
 jogo.btnStop.addEventListener("click", () => { 
-    
+    desabilitaPads();
+
 
     let couter = 0;
     on = true;
@@ -212,7 +248,7 @@ jogo.btnStop.addEventListener("click", () => {
 
         if (on) {
             jogo.contar.classList.remove("count-ativo");
-
+        
         } else {
 
             jogo.contar.classList.add("count");
@@ -221,13 +257,19 @@ jogo.btnStop.addEventListener("click", () => {
                 clearInterval(intervalo);
                 jogo.contar.innerHTML = "--";
  
-            }
+        }
         }
         on = !on;
     }, 250);
 
 });
     
+const mudaCursor = (cursorType) => {
+    jogo.pads.forEach(pad => {
+        pad.style.cursor = cursorType;
+    })
+}
+
 
 
 const desabilitaPads = () => {
@@ -251,15 +293,6 @@ const desabilitaPads = () => {
 }
 
 */
-
-
-
-
-
-
-
-
-
 
 
 
