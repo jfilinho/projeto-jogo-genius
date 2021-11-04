@@ -3,8 +3,7 @@ const jogar = {
     comecaJogo:  false,
     timeout: undefined,
     sons: [],
-    jogador: false,
-    score: 0,
+     score: 0,
     sequencia: [],
     playSequencia: [],
     jogadorPodeJogar: false,
@@ -15,16 +14,31 @@ const jogar = {
 
 
 const jogo = {
+    botaoComecarJogo: document.getElementById("comecar-jogo"),
+    containerJogo: document.getElementById("container-jogo"),
      selecionar:  document.getElementById("seleciona"),
-     primeiroNivel:  document.getElementById("nivel1"),
-     segundoNivel:  document.getElementById("nivel2"),
-     terceiroNivel:  document.getElementById("nivel3"),
-
+   
+    instrucoes: document.getElementById("instrucoes"),
+    
+    resultadoGanhou: document.querySelector('.ganhou'),
     btnStart:  document.querySelector(".btn-start"),
     btnStop: document.querySelector(".btn-stop"),
     contar:  document.querySelector(".count"),
     pads: document.querySelectorAll(".pad")
 }
+const winnerElement = document.getElementById("winner");
+
+
+jogo.botaoComecarJogo.addEventListener("click", function (){
+   jogo.instrucoes.classList.add("d-none");
+    jogo.botaoComecarJogo.classList.add("d-none");
+    if(jogo.containerJogo.style.display = "none"){
+        jogo.containerJogo.style.display = "block";
+    }else{
+       jogo. containerJogo.style.display = "none";
+    }
+})  ;
+
 //sons do jogo
 const sonsUrl = [
     "./assets/audios/simonSound1.mp3",
@@ -42,6 +56,7 @@ sonsUrl.forEach(sndPaht  => {
 
 //clique do botão start 
 jogo.btnStart.addEventListener("click", () =>{
+    winnerElement.innerText = " ";
 
     startJogo();
     jogo.btnStart.classList.toggle(".btn:active"); 
@@ -91,14 +106,18 @@ const startJogo = () => {
           //jogador errou a sequencia. 
             jogar.jogadorPodeJogar = false;
             desabilitaPads();
-           // playSequencia();
            resetPlayAgain();
+            winnerElement.innerText = "Perdeu, Tente Novamente!";
+
     }else if(movimentoAtual === jogar.sequencia.length - 1){
         novaCor();
         playSequencia();
     }
-        esperaClick();
+
+    esperaClick();
+
      }, 250 );
+
     }
         
 
@@ -115,10 +134,12 @@ const setScore = () => {
 
 //escolhe uma cor aleatória para o jogo
 const novaCor = () => {
-    if(jogar.score === 3){
+    if(jogar.score === 2){
+        winnerElement.innerText = "Parabéns você ganhou!!";
+
         piscar("ok");
         pad.classList.remove("pad--active");
-    
+
         return;
 }
 
@@ -149,7 +170,8 @@ const  playSequencia  = () => {
         if(padOn){
 
            if (counter  === jogar.sequencia.length){
-             clearInterval(intervalo);
+
+            clearInterval(intervalo);
             desabilitaPads();
                esperaClick();
                mudaCursor("pointer");
@@ -203,35 +225,40 @@ const piscar =  (text , calback) => {
 // espera clique do jogador.
 const esperaClick = () => {
     clearTimeout(jogar.timeout);
-   
+
     jogar.timeout = setTimeout(() =>{
+
         if(!jogar.jogadorPodeJogar)
-            return; 
+
+        return; 
+           
             desabilitaPads();
-            //playSequencia();
-            resetPlayAgain();
-            
+             resetPlayAgain();
+
     }, 5000);
+
 }
 
 const resetPlayAgain = () => {
     jogar.jogadorPodeJogar = false;
        if(jogar.reset === false){
-           piscar("!!", () => {
-               jogar.score = 0;
-               jogargar.sequencia = [];
-                //comecaJogo();
+
+        piscar("!!", () => {
+
+            jogar.score = 0;
+               jogar.sequencia = [];
+
            })
        }
       else{
-           piscar("**", () => {
-               jogar.score();
+           piscar("!!", () => {
+
+            jogar.score();
                
            });
       } 
           
 
-         //playSequencia();
 
 }
 
@@ -239,6 +266,7 @@ const resetPlayAgain = () => {
 jogo.btnStop.addEventListener("click", () => { 
     desabilitaPads();
 
+    winnerElement.innerText = " ";
 
     let couter = 0;
     on = true;
@@ -283,16 +311,6 @@ const desabilitaPads = () => {
 
 
 
-/*function configFimDeJogo() {
-    campoPalpite.disabled = true;
-    envioPalpite.disabled = true;
-    botaoReinicio = document.createElement('button');
-    botaoReinicio.textContent = 'Iniciar novo jogo';
-    document.body.appendChild(botaoReinicio);
-    botaoReinicio.addEventListener('click', reiniciarJogo);
-}
-
-*/
 
 
 

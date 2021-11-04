@@ -2,11 +2,24 @@ html{
 font-size: 62.5;
 }
 body{
-font-family: Georgia, 'Times New Roman', Times, serif;
+font-family: 'Oswald', sans-serif;
 background-image: url(../image/fundo.jpg);
 }
 
+.instrucoes{
+    background-image: url(../image/fundo_instrucoes.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 550px;
+    width: auto;
+    left: 500px;
+    text-align: justify;
+     padding: 10px;
+    color: #4000FF;
+    font-size: 1.3rem;
 
+    
+}
 
 .container{
     display: block;
@@ -15,6 +28,7 @@ background-image: url(../image/fundo.jpg);
 }
 
 .container-jogo{
+display: none;
 width: 480px;
 margin-left: auto;
 margin-right: auto;
@@ -129,11 +143,7 @@ margin-top: 0px;
     border: .2rem solid black;
     cursor: pointer;
 }
-.btn:active{
-    transform: translate(0 .2rem);
-    box-shadow: none;
-    cursor: pointer;
-}
+
 .btn-stop{
   background-color: yellow; 
    width: 3.2rem;
@@ -144,9 +154,19 @@ margin-top: 0px;
     cursor: pointer;
 }
 
+.btn-comecar{
+margin: 20px;
+margin-right: 10px;
+display:flex;
+justify-content: center;
+align-items: center;
+}
 
 /*rodapé*/
 .rodape{
     text-align: center;
     margin-top: 6rem;
 }
+
+
+
