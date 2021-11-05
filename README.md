@@ -11,7 +11,7 @@ Manipulação de objetos com JavaScript e DOM, estiliazação de páginas com cs
 ## Aprendizagem
 HTML5, CSS3, JavaScript e DOM. 
 ### Apresentacao
-[Link da Aprentação](https://docs.google.com/presentation/d/1PwlZddxuyt6j6cAd_68urwM7Cde8QtgLT5HMPo6ps-s/edit#slide=id.p)
+[Link da Aprentação](https://docs.google.com/presentation/d/1PwlZddxuyt6j6cAd_68urwM7Cde8QtgLT5HMPo6ps-s/edit#slide=id.g1003c277bc9_0_440)
 ### Jogo Genius
 [Link do Jogo](https://jfilinho.github.io/projeto-jogo-genius/)
 
