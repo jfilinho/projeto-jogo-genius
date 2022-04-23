@@ -134,7 +134,7 @@ const setScore = () => {
 
 //escolhe uma cor aleatória para o jogo
 const novaCor = () => {
-    if(jogar.score === 5){
+    if(jogar.score === 20){
         winnerElement.innerText = "Parabéns você ganhou!!";
 
         piscar("ok");
