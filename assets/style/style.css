@@ -1,3 +1,9 @@
+*{
+    padding:0px;
+    margin:0px;
+}
+
+
 html{
 font-size: 62.5;
 }
@@ -7,32 +13,38 @@ background-image: url(../image/fundo.jpg);
 }
 
 .instrucoes{
-    background-image: url(../image/fundo_instrucoes.png);
     background-repeat: no-repeat;
     background-position: center;
-    height: 550px;
-    width: auto;
+    margin-bottom: 20px;
+    width: 100%;
     left: 500px;
     text-align: justify;
      padding: 10px;
-    color: #4000FF;
+    color: black;
     font-size: 1.3rem;
-
     
 }
+.paragrafos{
+     margin:10px;
+    color:#4000FF;
+}
 
-.container{
+.container-fluid{
     display: block;
-    justify-content: center;
-    
-}
+    padding: 10px;
+     justify-content: center;
+    margin-bottom:10px;
+ }
+ .container-fluid h1{
+     text-align:center;
+ }
 
 .container-jogo{
 display: none;
 width: 480px;
 margin-left: auto;
 margin-right: auto;
-margin-top: 6rem;
+margin-top: 2rem;
 }
 .title{
     font-size: 3.5rem;
@@ -155,18 +167,19 @@ margin-top: 0px;
 }
 
 .btn-comecar{
-margin: 20px;
-margin-right: 10px;
-display:flex;
-justify-content: center;
-align-items: center;
+margin-top: 30px;
+width:200px;
+margin:auto;
+text-align:center;
 }
 
 /*rodapé*/
 .rodape{
+    background:black;
+    color:white;
+    padding:15px;
     text-align: center;
-    margin-top: 6rem;
-}
-
-
+    margin-bottom: 0px;
+    margin-top:10px;
+ }
 
